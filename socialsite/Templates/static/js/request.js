@@ -95,6 +95,8 @@ $('#request_name').mouseup(function(){
 	if(friendname != ""){
 		$.get('/send_request/',{friendname:friendname},function(data){
 			$('#name_search_result').html(data);
+			$('#name_search_result').fadeIn("fast",function(){$('#name_search_result').fadeOut(5000);});
+			$('#friend_request_name').val('');
 		});
 	}
 });
@@ -108,6 +110,8 @@ $('#request_email').mouseup(function(){
 	if(email != ""){
 		$.get('/send_request/',{email:email},function(data){
 			$('#email_search_result').html(data);
+			$('#email_search_result').fadeIn("fast",function(){$('#name_search_result').fadeOut(5000);});
+			$('#friend_request_email').val('');
 		});
 	}
 });
@@ -117,4 +121,11 @@ function refreshPage(){
 	getAllfriends();
 	getAllPosts();
 }
+$("#spinner").bind("ajaxSend", function() {
+        $(this).show();
+    }).bind("ajaxStop", function() {
+        $(this).hide();
+    }).bind("ajaxError", function() {
+        $(this).hide();
+    });
 });
